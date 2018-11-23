@@ -17,10 +17,15 @@
     <el-form-item prop="password">
       <el-input v-model="account.password" type="password" placeholder="密码"></el-input>
     </el-form-item>
-    <el-checkbox v-model="checked" checked>记住密码</el-checkbox>
+    <el-checkbox v-model="checked" checked>记住密码</el-checkbox> 
     <el-form-item>
-      <el-button type="primary">login</el-button>
-      <el-button type="primary">reset</el-button>
+      <el-button @click.native.prevent="handleLogin" :loading="logining" type="primary">login</el-button>
+      <el-button
+        type="primary"
+        class="resetBtn"
+        @click.native.prevent="reset">
+        reset
+      </el-button>
     </el-form-item>
   </el-form>
 
