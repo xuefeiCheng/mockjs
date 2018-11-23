@@ -7,7 +7,6 @@ import Router from 'vue-router'
 // component: () => import('@/pages/login/Login')
 Vue.use(Router)
 
-
 const initialRouteMap = [
   { path: '/', component: () => import('@/pages/login/Login') },
   { path: '/home', component: () => import('@/pages/home/Home') },
@@ -18,14 +17,14 @@ const router = new Router({
 })
 // 访问之前，检查是否登陆了
 router.beforeEach((to, from, next) => {
-  if(to.path.startsWith('/login')) {
-    window.sessionStorage.removeItem('user');
+  if (to.path.startsWith('/login')) {
+    window.sessionStorage.removeItem('user')
     next()
-  }else {
-    let token = window.sessionStorage.getItem('user');
+  } else {
+    let token = window.sessionStorage.getItem('user')
     if (!token) {
       next({path: '/login'})
-    }else {
+    } else {
       next()
     }
   }
