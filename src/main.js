@@ -7,7 +7,7 @@ import axios from 'axios'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 
-import MockAdapter from 'axios-mock-adapter'
+// import MockAdapter from 'axios-mock-adapter'
 
 Vue.prototype.axios = axios
 Vue.config.productionTip = false
