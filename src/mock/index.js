@@ -1,6 +1,6 @@
 
 // 通过axios-mock-adapter生成代理api地址
-import axios from 'axios'
+import axios from '@/util/http'
 import MockAdapter from 'axios-mock-adapter'
 
 // import { LoginUsers } from './data/user'
