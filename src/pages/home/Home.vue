@@ -6,7 +6,7 @@
 </template>
 <script>
 export default {
-  name: '后台主界面',
+  name: 'home',
   data () {
     return {
       msg: '后台主界面'
