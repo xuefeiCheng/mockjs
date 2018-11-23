@@ -32,26 +32,71 @@
 </template>
 
 <script>
-// import {requseLogin} from "../axios/api"
+  import {requseLogin} from "../axios/api";
 
-export default {
-  name: 'login',
-  data () {
-    return {
-      account: {
-        username: '',
-        password: ''
+  export default {
+    name: "login",
+    data () {
+      return {
+        account: {
+          username: '',
+          password: ''
+        },
+        loginRules: {
+          username: [{required: true, message: '请输入账号', trigger: 'blur'}],
+          password: [{required: true,message: '请输入密码', trigger: 'blur'}],
+        },
+        checked: true,
+        logining: false
+      };
+    },
+    methods: {
+      handleLogin() {
+        this.$refs.AccountForm.validate((valid) => {
+          if (valid) {
+            this.logining = true;
+            let loginParams = {
+              username: this.account.username,
+              password: this.account.password
+            }
+            // 调用axios登录接口
+            requseLogin(loginParams).then(res => {
+              // debugger;
+              this.logining = false;
+              // 根据返回的code判断是否成功
+              let { code, msg, user } = res.data;
+              if (code === 200) {
+                // elementui中提示组件
+                this.$message({
+                  type: 'success',
+                  message: msg
+                });
+                // 登陆成功，用户信息就保存在sessionStorage中
+                sessionStorage.setItem('user', JSON.stringify(user));
+                // 跳转到后台主页面
+                console.log('this',this)
+                this.$router.push({ path: '/home' })
+
+              }else {
+                this.$message({
+                  type: 'error',
+                  message: msg,
+                });
+              }
+            }).catch(err =>{
+              console.log(err);
+            });
+          }else {
+            console.log('error submit!');
+            return false;
+          }
+        })
       },
-      loginRules: {
-        username: [{required: true, message: '请输入账号', trigger: 'blur'}],
-        password: [{required: true, message: '请输入密码', trigger: 'blur'}]
+      reset () {
+        this.$refs.AccountForm.resetFields()
       },
-      checked: true,
-      logining: false
     }
-  },
-  methods: {}
-}
+    }
 </script>
 
 <style scoped>
