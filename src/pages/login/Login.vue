@@ -32,7 +32,7 @@
 </template>
 
 <script>
-  import {requseLogin} from "../axios/api";
+  import {requseLogin} from "@/axios/api";
 
   export default {
     name: "login",
